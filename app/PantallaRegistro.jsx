@@ -14,15 +14,39 @@ export default function PantallaRegistro() {
   const [nombre, setNombre] = React.useState('');
 
   const handleRegistro = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('users')
-        .insert([{ email, password, name: nombre }]);
 
-      if (error) {
-        console.log('Error al registrar el usuario:', error);
-      } else {
-        console.log('Usuario registrado:', data);
+    console.log("handleRegistro ejecutado"); 
+
+    try {
+
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            name: nombre
+          }
+        }
+      });
+
+      if (signUpError) {
+        console.log("Error al registrar usuario:", signUpError.message);
+        return;
+      }
+
+
+      if (signUpError) { throw signUpError;} 
+
+      //si no hay error me hace automaticamente login
+      const { error: loginError } = await supabase.auth.signInWithPassword({
+        email: email,       
+        password: password, 
+      });
+
+
+      //si no se pudo logear
+      if(loginError){
+        throw loginError;
       }
     } catch (err) {
       console.error(err);
@@ -31,7 +55,9 @@ export default function PantallaRegistro() {
 
   return (
     <View style={styles.container}>
+
       <Logo />
+
       <TextoBienvenida title="Crear cuenta" />
 
       <CampoTexto placeholder="Nombre" value={nombre} onChangeText={setNombre} />
@@ -47,6 +73,7 @@ export default function PantallaRegistro() {
           <Text style={styles.link}> Iniciá sesión</Text>
         </Link>
       </View>
+      
     </View>
   );
 }

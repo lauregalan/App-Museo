@@ -7,9 +7,10 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const INPUT_WIDTH = SCREEN_WIDTH * 0.85;
 
 
-export default function BotonInicioSesion({title = "Iniciar sesión" }) {
+export default function BotonInicioSesion({ title = "Iniciar sesión", onPress }) {
   return (
     <Pressable
+      onPress={onPress}
       style={({ pressed }) => [
         styles.button,
         pressed && { opacity: 0.8, transform: [{ scale: 0.98 }] },
