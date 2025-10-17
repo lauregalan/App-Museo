@@ -10,7 +10,9 @@ export default function CampoTexto(props) {
   return (
     <TextInput 
       style={styles.input}
-      placeholder={props.placeholder}    
+      placeholder={props.placeholder} 
+      value={props.value}
+      onChangeText={props.onChangeText}
       placeholderTextColor="#999"      
     />
   );
