@@ -1,6 +1,4 @@
-import React from "react-native";
-import { Pressable, Text, StyleSheet, Dimensions} from "react-native";
-
+import React, { Dimensions, Pressable, StyleSheet, Text } from "react-native";
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -8,6 +6,8 @@ const INPUT_WIDTH = SCREEN_WIDTH * 0.85;
 
 
 export default function BotonInicioSesion({ title = "Iniciar sesión", onPress }) {
+
+
   return (
     <Pressable
       onPress={onPress}
