@@ -1,14 +1,14 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import React from 'react';
-import { Pressable } from 'react-native';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link, Tabs } from "expo-router";
+import React from "react";
+import { Pressable } from "react-native";
 
-import { useColorScheme } from '@/app/components/useColorScheme';
-import Colors from '@/constants/Colors';
+import { useColorScheme } from "@/hooks/useColorScheme";
+import Colors from "@/constants/Colors";
 
 // Tu componente de ícono (no se toca)
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -20,85 +20,42 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        
-        // --- MODIFICADO ---
-        // Para que una barra flotante funcione, el header de las pestañas
-        // debe estar desactivado.
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-
-        // --- AÑADIDO: Estilo de la barra flotante ---
         tabBarStyle: {
-          position: 'absolute', // Clave para que flote
-          bottom: 25,           // Distancia desde abajo
-          left: 20,             // Distancia izquierda
-          right: 20,            // Distancia derecha
-          
-          height: 60,           // Altura
-          borderRadius: 30,     // Esquinas redondeadas
-          
-          // Usa el color de fondo de tu tema
-          backgroundColor: Colors[colorScheme ?? 'light'].background, 
-          
-          // Sombra (iOS)
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 5 },
-          shadowOpacity: 0.1,
-          shadowRadius: 5,
-          // Sombra (Android)
-          elevation: 5,
+          position: "absolute",
+          bottom: 25,
+          left: 20,
+          right: 20,
+          height: 60,
+          borderRadius: 30,
+          backgroundColor: Colors[colorScheme ?? "light"].background,
         },
-        // --- FIN DEL ESTILO AÑADIDO ---
-      }}>
-      
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="news"
         options={{
-          title: 'Inicio',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          
-          // --- ⚠️ AVISO: Esto ya no se mostrará ---
-          // Como 'headerShown' ahora es 'false', este botón
-          // debe moverse a un componente <Header> personalizado
-          // DENTRO de la pantalla 'app/(tabs)/index.js'
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          title: "Noticias",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="file-text" color={color} />
           ),
         }}
       />
+
       <Tabs.Screen
-        name="two"
+        name="index"
         options={{
-          title: 'Explorar',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Inicio",
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
 
       <Tabs.Screen
-        name="three"
+        name="fossils"
         options={{
-          title: 'Noticias',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-
-
-      <Tabs.Screen
-        name="four"
-        options={{
-          title: 'Exhibiciones',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Fósiles",
+          tabBarIcon: ({ color }) => <TabBarIcon name="paw" color={color} />,
         }}
       />
     </Tabs>

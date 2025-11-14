@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 import { Text, View } from "@/components/Themed";
 
-export default function Home() {
+export default function News() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Inicio</Text>
+      <Text style={styles.title}>News</Text>
     </View>
   );
 }

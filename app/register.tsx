@@ -1,37 +1,33 @@
-import { router } from 'expo-router';
+import { router } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
-import BotonInicioSesion from "../comps/BotonInicioSesion";
-import CampoTexto from "../comps/CampoTexto";
-import Logo from "../comps/Logo";
-import TextoBienvenida from "../comps/TextoBienvenida";
+import BotonInicioSesion from "../components/BotonInicioSesion";
+import CampoTexto from "../components/CampoTexto";
+import Logo from "../components/Logo";
+import TextoBienvenida from "../components/TextoBienvenida";
 
-export default function PantallaRegistro() {
+export default function Register() {
   const irInicio = () => {
-    router.push("/(tabs)")
-  }
+    router.push("/(tabs)");
+  };
   return (
     <View style={styles.container}>
-
       <Logo />
 
       <TextoBienvenida title="Crear cuenta" />
 
-      <CampoTexto placeholder="Nombre"  />
-      <CampoTexto placeholder="Correo electrónico"  />
+      <CampoTexto placeholder="Nombre" />
+      <CampoTexto placeholder="Correo electrónico" />
       <CampoTexto placeholder="Contraseña" />
-      <CampoTexto placeholder="Confirmar contraseña"/>
-      
-      <BotonInicioSesion title="Registrarse" onPress={irInicio}/>
-      
+      <CampoTexto placeholder="Confirmar contraseña" />
+
+      <BotonInicioSesion title="Registrarse" onPress={irInicio} />
+
       <View style={styles.footer}>
         <Text style={styles.text}>¿Ya tenés cuenta?</Text>
       </View>
-      
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

@@ -1,17 +1,24 @@
-import { router } from 'expo-router';
-import { View } from 'react-native';
-import BotonInicioSesion from '../comps/BotonInicioSesion';
-import CampoTexto from '../comps/CampoTexto';
-import Logo from '../comps/Logo';
-import NoRegistrado from '../comps/NoRegistrado';
-import TextoBienvenida from '../comps/TextoBienvenida';
+import { router } from "expo-router";
+import { View } from "react-native";
+import BotonInicioSesion from "../components/BotonInicioSesion";
+import CampoTexto from "../components/CampoTexto";
+import Logo from "../components/Logo";
+import NoRegistrado from "../components/NoRegistrado";
+import TextoBienvenida from "../components/TextoBienvenida";
 
-export default function Index() {
-  const irRegistro = ()=> {
-    router.push("/PantallaRegistro")
-  }
+export default function Login() {
+  const irRegistro = () => {
+    router.push("/register");
+  };
   return (
-    <View style={{ flex:1, alignItems:'center', justifyContent:'center', backgroundColor:'#fff' }}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#fff",
+      }}
+    >
       <Logo />
       <TextoBienvenida title="Iniciar sesión" />
       <CampoTexto placeholder="Correo electrónico" />
