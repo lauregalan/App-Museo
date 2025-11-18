@@ -2,12 +2,16 @@ import React from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import { router } from "expo-router";
 
+const irRegistro = () =>{
+  router.push("/register")
+}
+
 export default function NoRegistrado() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>¿No tenés cuenta?</Text>
 
-      <Pressable onPress={() => router.push("/PantallaRegistro")}>
+      <Pressable onPress={irRegistro}>
         <Text style={styles.link}>Registrate</Text>
       </Pressable>
 

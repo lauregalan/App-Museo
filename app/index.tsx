@@ -6,14 +6,20 @@ import Logo from "../components/Logo";
 import NoRegistrado from "../components/NoRegistrado";
 import TextoBienvenida from "../components/TextoBienvenida";
 import { useAuth } from "./hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Text } from "react-native";
 
 export default function Login() {
 
-  const {login, loading, error} = useAuth()
+  const {login, loading, error, isAuthenticated} = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  useEffect(() => {
+  if (!loading && isAuthenticated) {
+    router.replace("/(tabs)");
+  }
+  }, [loading, isAuthenticated]);
 
   const handleLogin = async () => {
     const res = await login(email, password)
@@ -21,7 +27,6 @@ export default function Login() {
     if(res){
       router.push("/(tabs)");
     }
-
   }
 
   return (
