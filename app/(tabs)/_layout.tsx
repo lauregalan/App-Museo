@@ -20,7 +20,6 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-<<<<<<< HEAD
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
 
         headerShown: false,
@@ -44,31 +43,18 @@ export default function TabLayout() {
           shadowRadius: 5,
           // Sombra (Android)
           elevation: 5,
-=======
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 25,
-          left: 20,
-          right: 20,
-          height: 60,
-          borderRadius: 30,
-          backgroundColor: Colors[colorScheme ?? "light"].background,
->>>>>>> origin/main
         },
       }}
     >
       <Tabs.Screen
         name="news"
         options={{
-<<<<<<< HEAD
           title: 'Inicio',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           
  
           headerRight: () => (
-            <Link href="/modal" asChild>
+
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -79,12 +65,6 @@ export default function TabLayout() {
                   />
                 )}
               </Pressable>
-            </Link>
-=======
-          title: "Noticias",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="file-text" color={color} />
->>>>>>> origin/main
           ),
         }}
       />
@@ -92,13 +72,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-<<<<<<< HEAD
           title: 'Exhibiciones',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-=======
-          title: "Inicio",
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
->>>>>>> origin/main
         }}
       />
 
