@@ -1,16 +1,35 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
-import NewsCarrousel from '@/components/NewsCarrousel';
-import React from 'react';
 import TextoSeparador from '@/components/TextoSeparador';
+import NewsCarrousel from '@/components/NewsCarrousel';
+import { useNews } from '../hooks/useNews';
 
 export default function Home() {
+  const { data, isLoading, error } = useNews();
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ padding: 20, flex: 1 }}>
+        <Text>Hubo un quilombo cargando la información del inicio.</Text>
+      </View>
+    );
+  }
+
+  if (!data) return null;
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <TextoSeparador /> 
-      <NewsCarrousel />
+      <TextoSeparador />
+      <NewsCarrousel data={data} />
     </SafeAreaView>
   );
 }
@@ -18,15 +37,5 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
   },
 });

@@ -1,34 +1,34 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { NewsItem } from "@/app/types/newsItem";
-import {
-  FlatList,
-  View,
-  Text,
-  ActivityIndicator,
-  Dimensions,
-  StyleSheet,
-} from "react-native";
-
+import { FlatList, View, Text, StyleSheet, Dimensions } from "react-native";
 import NewsCard from "./NewsCard";
+import { Fossil } from "../app/types/Fossils";
+import { NewsItem } from "@/app/types/newsItem";
 
+<<<<<<< HEAD
 const API_NEWS_URL = "http://192.168.1.19:3001/news";
 const API_BASE_URL = "http://192.168.1.19:3001";
+=======
+const API_BASE_URL = "http://192.168.1.16:3001";
+>>>>>>> 9673b850e18be19385f29b5a05f509a0e0643610
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const CARD_WIDTH = SCREEN_WIDTH * 0.85;
 const SPACING = 60;
 const SIDE_PADDING = (SCREEN_WIDTH - CARD_WIDTH) / 2;
 
-export default function NewsCarousel() {
-  const query = useQuery<NewsItem[]>({
-    queryKey: ["news"],
-    queryFn: async () => {
-      const response = await fetch(API_NEWS_URL);
-      if (!response.ok) throw new Error("Error en la API");
-      return response.json();
-    },
-  });
+const styles = StyleSheet.create({
+  loader: {
+    height: 300,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
+
+interface Props {
+  data: NewsItem[];
+}
+
+export default function NewsCarousel({ data }: Props) {
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -38,26 +38,10 @@ export default function NewsCarousel() {
     }).format(date);
   }
 
-  if (query.isLoading) {
-    return (
-      <View style={styles.loader}>
-        <ActivityIndicator size="large" color="#000" />
-      </View>
-    );
-  }
-
-  if (query.isError) {
-    return (
-      <View style={styles.loader}>
-        <Text style={{ color: "red" }}>No se pudieron cargar las noticias.</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={{ marginTop: 20 }}>
       <FlatList
-        data={query.data}
+        data={data}
         horizontal
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
@@ -75,19 +59,10 @@ export default function NewsCarousel() {
         decelerationRate="fast"
         contentContainerStyle={{
           paddingHorizontal: SIDE_PADDING,
-          paddingVertical: 10,  
+          paddingVertical: 10,
         }}
         ItemSeparatorComponent={() => <View style={{ width: SPACING }} />}
       />
     </View>
-
   );
 }
-
-const styles = StyleSheet.create({
-  loader: {
-    height: 300,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
