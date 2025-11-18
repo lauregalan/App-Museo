@@ -5,11 +5,25 @@ import CampoTexto from "../components/CampoTexto";
 import Logo from "../components/Logo";
 import NoRegistrado from "../components/NoRegistrado";
 import TextoBienvenida from "../components/TextoBienvenida";
+import { useAuth } from "./hooks/useAuth";
+import { useState } from "react";
+import { Text } from "react-native";
 
 export default function Login() {
-  const irRegistro = () => {
-    router.push("/register");
-  };
+
+  const {login, loading, error} = useAuth()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleLogin = async () => {
+    const res = await login(email, password)
+    
+    if(res){
+      router.push("/(tabs)");
+    }
+
+  }
+
   return (
     <View
       style={{
@@ -20,11 +34,16 @@ export default function Login() {
       }}
     >
       <Logo />
-      <TextoBienvenida title="Iniciar sesión" />
-      <CampoTexto placeholder="Correo electrónico" />
-      <CampoTexto placeholder="Contraseña" />
-      <BotonInicioSesion title="Iniciar sesión" onPress={irRegistro} />
+      <TextoBienvenida title="Iniciar sesión"/>
+      <CampoTexto placeholder="Correo electrónico" value={email} onChangeText={setEmail}/>
+      <CampoTexto placeholder="Contraseña" value={password} onChangeText={setPassword}/>
+      <BotonInicioSesion title="Iniciar sesión" onPress={handleLogin} />
       <NoRegistrado />
-    </View>
+      {error && (
+        <Text style={{ color: "red" }}>
+          La cuenta no está registrada o la contraseña fue incorrecta
+        </Text>
+      )}    
+  </View>
   );
 }

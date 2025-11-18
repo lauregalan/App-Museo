@@ -6,8 +6,6 @@ const INPUT_WIDTH = SCREEN_WIDTH * 0.85;
 
 
 export default function BotonInicioSesion({ title = "Iniciar sesión", onPress }) {
-
-
   return (
     <Pressable
       onPress={onPress}

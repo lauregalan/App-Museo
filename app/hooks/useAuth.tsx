@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as SecureStore from "expo-secure-store";
 
-const API_URL = "http://192.168.1.19:3001";
+const API_URL = "http://192.168.1.18:3001";
 
 export function useAuth() {
   const [loading, setLoading] = useState(false);
@@ -12,6 +12,7 @@ export function useAuth() {
     setError(null);
 
     try {
+
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
