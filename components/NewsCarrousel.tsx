@@ -12,8 +12,8 @@ import {
 
 import NewsCard from "./NewsCard";
 
-const API_NEWS_URL = "http://192.168.1.16:3001/news";
-const API_BASE_URL = "http://192.168.1.16:3001";
+const API_NEWS_URL = "http://192.168.1.19:3001/news";
+const API_BASE_URL = "http://192.168.1.19:3001";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const CARD_WIDTH = SCREEN_WIDTH * 0.85;

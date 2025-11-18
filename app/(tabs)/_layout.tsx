@@ -46,7 +46,7 @@ export default function TabLayout() {
         },
       }}
     >
-      <Tabs.Screen
+      {/*<Tabs.Screen
         name="news"
         options={{
           title: 'Inicio',
@@ -67,13 +67,13 @@ export default function TabLayout() {
               </Pressable>
           ),
         }}
-      />
+      />*/}
 
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Exhibiciones',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />, 
         }}
       />
 
@@ -82,6 +82,22 @@ export default function TabLayout() {
         options={{
           title: "Fósiles",
           tabBarIcon: ({ color }) => <TabBarIcon name="paw" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="three"
+        options={{
+          title: "Scann",
+          tabBarIcon: ({ color }) => <TabBarIcon name="qrcode" color={color} />,
+        }}
+      />
+
+      <Tabs.Screen
+        name="perfil"
+        options={{
+          title: "Perfil",
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </Tabs>

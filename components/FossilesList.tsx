@@ -18,7 +18,7 @@ export default function FossilsList({ data }: Props) {
           <View style={styles.card}>
             {frontImage && (
               <Image
-                source={{ uri: `http://192.168.1.16:3001/${frontImage.url}` }}
+                source={{ uri: `http://192.168.1.19:3001/${frontImage.url}` }}
                 style={styles.image}
               />
             )}
