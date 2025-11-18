@@ -1,14 +1,14 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import React from 'react';
-import { Pressable } from 'react-native';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { Link, Tabs } from "expo-router";
+import React from "react";
+import { Pressable } from "react-native";
 
-import { useColorScheme } from '@/app/components/useColorScheme';
-import Colors from '@/constants/Colors';
+import { useColorScheme } from "@/hooks/useColorScheme";
+import Colors from "@/constants/Colors";
 
 // Tu componente de ícono (no se toca)
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -20,6 +20,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+<<<<<<< HEAD
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
 
         headerShown: false,
@@ -43,13 +44,25 @@ export default function TabLayout() {
           shadowRadius: 5,
           // Sombra (Android)
           elevation: 5,
+=======
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        headerShown: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 25,
+          left: 20,
+          right: 20,
+          height: 60,
+          borderRadius: 30,
+          backgroundColor: Colors[colorScheme ?? "light"].background,
+>>>>>>> origin/main
         },
-        // --- FIN DEL ESTILO AÑADIDO ---
-      }}>
-      
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="news"
         options={{
+<<<<<<< HEAD
           title: 'Inicio',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           
@@ -67,31 +80,33 @@ export default function TabLayout() {
                 )}
               </Pressable>
             </Link>
+=======
+          title: "Noticias",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="file-text" color={color} />
+>>>>>>> origin/main
           ),
         }}
       />
+
       <Tabs.Screen
-        name="two"
+        name="index"
         options={{
+<<<<<<< HEAD
           title: 'Exhibiciones',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+=======
+          title: "Inicio",
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+>>>>>>> origin/main
         }}
       />
 
       <Tabs.Screen
-        name="three"
+        name="fossils"
         options={{
-          title: 'Noticias',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-
-
-      <Tabs.Screen
-        name="four"
-        options={{
-          title: 'Exhibiciones',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Fósiles",
+          tabBarIcon: ({ color }) => <TabBarIcon name="paw" color={color} />,
         }}
       />
     </Tabs>
