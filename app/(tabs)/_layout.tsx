@@ -21,13 +21,9 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        
-        // --- MODIFICADO ---
-        // Para que una barra flotante funcione, el header de las pestañas
-        // debe estar desactivado.
+
         headerShown: false,
 
-        // --- AÑADIDO: Estilo de la barra flotante ---
         tabBarStyle: {
           position: 'absolute', // Clave para que flote
           bottom: 25,           // Distancia desde abajo
@@ -35,7 +31,7 @@ export default function TabLayout() {
           right: 20,            // Distancia derecha
           
           height: 60,           // Altura
-          borderRadius: 30,     // Esquinas redondeadas
+          borderRadius: 10,     // Esquinas redondeadas
           
           // Usa el color de fondo de tu tema
           backgroundColor: Colors[colorScheme ?? 'light'].background, 
@@ -57,10 +53,7 @@ export default function TabLayout() {
           title: 'Inicio',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           
-          // --- ⚠️ AVISO: Esto ya no se mostrará ---
-          // Como 'headerShown' ahora es 'false', este botón
-          // debe moverse a un componente <Header> personalizado
-          // DENTRO de la pantalla 'app/(tabs)/index.js'
+ 
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -80,7 +73,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Explorar',
+          title: 'Exhibiciones',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { useColorScheme } from '@/app/components/useColorScheme';
 
@@ -20,6 +21,8 @@ export const unstable_settings = {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -49,22 +52,16 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        {/* 1. AÑADIDO: Tu pantalla de Login (index) */}
-        {/* La ponemos primero y le ocultamos el header */}
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-
-        {/* 2. AÑADIDO: Tu pantalla de Registro */}
-        {/* Esta sí puede tener un header (para el botón de "atrás") */}
-        <Stack.Screen name="PantallaRegistro" options={{ title: "Registro" }} />
-
-        {/* 3. TU GRUPO DE TABS (Ya estaba) */}
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-
-        {/* 4. TU MODAL (Ya estaba) */}
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+<QueryClientProvider client={queryClient}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="PantallaRegistro" options={{ title: "Registro" }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          <Stack.Screen name="QrEscaner"/>
+        </Stack>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

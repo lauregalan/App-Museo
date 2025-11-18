@@ -1,31 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator } from "react-native";
+import { useFossils } from "../hooks/useFossils";
+import FossilsList from "../../comps/FossilesList";
 
-import EditScreenInfo from '@/app/components/EditScreenInfo';
-import { Text, View } from '@/app/components/Themed';
+export default function FossilsScreen() {
+  
+  const { data, isLoading, error } = useFossils();
 
-export default function TabTwoScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
-    </View>
-  );
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ padding: 20, flex: 1}}>
+        <Text>Hubo un problema cargando los fósiles.</Text>
+      </View>
+    );
+  }
+  if (!data) return null;
+
+  return <FossilsList data={data} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
