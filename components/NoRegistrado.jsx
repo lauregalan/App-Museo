@@ -1,20 +1,26 @@
 import React from "react";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { router } from "expo-router";
-
-const irRegistro = () =>{
-  router.push("/register")
-}
+import BotonInicioSesion from "./BotonInicioSesion"; // Importamos el botón
 
 export default function NoRegistrado() {
+  const irRegistro = () => {
+    router.push("/register");
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>¿No tenés cuenta?</Text>
+      {/* Línea divisoria sutil */}
+      <View style={styles.divider} />
+      
+      <Text style={styles.text}>¿No tienes una cuenta?</Text>
 
-      <Pressable onPress={irRegistro}>
-        <Text style={styles.link}>Registrate</Text>
-      </Pressable>
-
+      {/* Reutilizamos el botón en modo secundario */}
+      <BotonInicioSesion 
+        title="Registrate aquí" 
+        onPress={irRegistro} 
+        isPrimary={false} 
+      />
     </View>
   );
 }
@@ -22,17 +28,20 @@ export default function NoRegistrado() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    flexDirection: "row",
+    width: "100%",
     alignItems: "center",
-    justifyContent: "center",
+  },
+  divider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: "#eee",
+    marginBottom: 20,
   },
   text: {
-    color: "#666",
-    fontSize: 14,
-  },
-  link: {
-    color: "#b99b55ff",
-    fontWeight: "bold",
-    marginLeft: 6,
+    color: "#555",
+    fontSize: 16,
+    marginBottom: 5,
+    textAlign: "left",
+    width: "85%",
   },
 });

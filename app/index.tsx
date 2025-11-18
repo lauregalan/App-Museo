@@ -11,13 +11,13 @@ import { Text } from "react-native";
 
 export default function Login() {
 
-  const {login, loading, error, isAuthenticated} = useAuth()
+  const {login, loading, error, isAuthenticated, logout} = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   useEffect(() => {
   if (!loading && isAuthenticated) {
-    router.replace("/(tabs)");
+    {/* router.replace("/(tabs)"); */}
   }
   }, [loading, isAuthenticated]);
 
@@ -38,10 +38,10 @@ export default function Login() {
         backgroundColor: "#fff",
       }}
     >
-      <Logo />
+
       <TextoBienvenida title="Iniciar sesión"/>
-      <CampoTexto placeholder="Correo electrónico" value={email} onChangeText={setEmail}/>
-      <CampoTexto placeholder="Contraseña" value={password} onChangeText={setPassword}/>
+      <CampoTexto label="Correo Electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={true}/>
+      <CampoTexto label="Contraseña "placeholder="********" value={password} onChangeText={setPassword} secureTextEntry={true}/>
       <BotonInicioSesion title="Iniciar sesión" onPress={handleLogin} />
       <NoRegistrado />
       {error && (

@@ -1,41 +1,57 @@
-import React, { Dimensions, Pressable, StyleSheet, Text } from "react-native";
+import React from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
-const INPUT_WIDTH = SCREEN_WIDTH * 0.85;
-
-
-export default function BotonInicioSesion({ title = "Iniciar sesión", onPress }) {
+export default function BotonInicioSesion({
+  title = "Iniciar sesión",
+  onPress,
+  isPrimary = true,  
+}) {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.button,
-        pressed && { opacity: 0.8, transform: [{ scale: 0.98 }] },
+        styles.base,
+        isPrimary ? styles.primary : styles.secondary,
+        pressed && styles.pressed,
       ]}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, !isPrimary && styles.textSecondary]}>
+        {title}
+      </Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#b99b55ff",
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 15,
-    elevation: 3, // para los usuarios de androide 
-    shadowColor: "#000", // para los usuarios de la manzana
+  base: {
+    paddingVertical: 14,
+    borderRadius: 6, // Bordes más cuadrados como la imagen
+    width: "85%",
     alignItems: "center",
-    width: INPUT_WIDTH, 
-    marginVertical: 5,
-    
+    justifyContent: "center",
+    marginVertical: 10,
   },
-  
+  primary: {
+    backgroundColor: "#D98E32", // Color Ocre/Naranja de la imagen
+    elevation: 2,
+  },
+  secondary: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: "#D98E32", // Mismo color para el borde
+  },
+  pressed: {
+    opacity: 0.8,
+  },
   text: {
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
+    textTransform: "uppercase", // La imagen usa mayúsculas en el botón
+  },
+  textSecondary: {
+    color: "#333", // Texto oscuro para el botón de registro
+    textTransform: "none", // "Registrate aquí" no está todo en mayúsculas
+    fontWeight: "600",
   },
 });

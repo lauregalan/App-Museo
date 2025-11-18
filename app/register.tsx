@@ -32,10 +32,10 @@ export default function Register() {
 
       <TextoBienvenida title="Crear cuenta" />
 
-      <CampoTexto placeholder="Correo electrónico" value={email} onChangeText={setEmail}/>
-      <CampoTexto placeholder="Contraseña" value={password} onChangeText={setPassword}/>
+      <CampoTexto label="Correo electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={true}/>
+      <CampoTexto label="Contraseña" placeholder="********" value={password} onChangeText={setPassword} secureTextEntry={true}/>
 
-      <CampoTexto placeholder="Confirmar contraseña" />
+      <CampoTexto label="COnfirmar contraseña" placeholder="********"  value={password} onChangeText={setPassword} secureTextEntry={true}/>
 
       <BotonInicioSesion title="Registrarse" onPress={handleRegister} />
 

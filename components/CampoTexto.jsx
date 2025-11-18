@@ -1,31 +1,53 @@
 import React from "react";
-import { TextInput, StyleSheet, Dimensions } from "react-native"; 
+import { TextInput, StyleSheet, View, Text } from "react-native";
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
-const INPUT_WIDTH = SCREEN_WIDTH * 0.85; 
-
-
-export default function CampoTexto(props) {
+export default function CampoTexto({ 
+  label, 
+  placeholder, 
+  value, 
+  onChangeText, 
+  secureTextEntry 
+}) {
   return (
-    <TextInput 
-      style={styles.input}
-      placeholder={props.placeholder} 
-      value={props.value}
-      onChangeText={props.onChangeText}
-      placeholderTextColor="#999"      
-    />
+    <View style={styles.container}>
+      {label && (
+        <Text style={styles.label}>
+          {label} <Text style={styles.required}>*</Text>
+        </Text>
+      )}
+      <TextInput 
+        style={styles.input}
+        placeholder={placeholder} 
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
+        placeholderTextColor="#999"      
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
-    margin: 5,
-    borderWidth: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    width: INPUT_WIDTH, 
-    borderRadius: 15,
-    borderColor: "#ccc",
+  container: {
+    width: "85%",
+    marginBottom: 15,
   },
+  label: {
+    fontSize: 16,
+    color: "#555",
+    marginBottom: 6,
+    fontWeight: "500",
+  },
+  required: {
+    color: "red",
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#ccc", // Gris suave como en la imagen
+    padding: 12,
+    borderRadius: 4, // Bordes menos redondeados según la imagen
+    backgroundColor: "#fff",
+    fontSize: 16,
+  }
 });
