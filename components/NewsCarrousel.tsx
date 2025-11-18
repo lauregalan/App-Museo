@@ -4,12 +4,8 @@ import NewsCard from "./NewsCard";
 import { Fossil } from "../app/types/Fossils";
 import { NewsItem } from "@/app/types/newsItem";
 
-<<<<<<< HEAD
 const API_NEWS_URL = "http://192.168.1.19:3001/news";
 const API_BASE_URL = "http://192.168.1.19:3001";
-=======
-const API_BASE_URL = "http://192.168.1.16:3001";
->>>>>>> 9673b850e18be19385f29b5a05f509a0e0643610
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const CARD_WIDTH = SCREEN_WIDTH * 0.85;
