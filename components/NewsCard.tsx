@@ -20,7 +20,6 @@ const NewsCard = ({
     <View style={[styles.card, style]}>
       <View style={styles.imageWrapper}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
-
         {/* OVERLAY suave para que el texto nunca compita con la imagen */}
         <View style={styles.overlay} />
       </View>
@@ -48,9 +47,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     borderRadius: 0,
-    overflow: "hidden",
-
-    // Sombras god
+    overflow: "hidden",    // Sombras god
     shadowColor: "#000",
     shadowOpacity: 0.12,
     shadowRadius: 8,
