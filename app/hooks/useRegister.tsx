@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as SecureStore from "expo-secure-store";
 
-const API_URL = "http://192.168.1.16:3001";
+const API_URL = `${process.env.EXPO_PUBLIC_API_URL}`;
 
 export function useRegister() {
   const [loading, setLoading] = useState(false);

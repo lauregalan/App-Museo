@@ -48,7 +48,7 @@ export default function FossilDetail() {
       <View style={styles.imageHeaderContainer}>
         {frontImage ? (
           <Image
-            source={{ uri: `http://192.168.1.16:3001/${frontImage.url}` }}
+            source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${frontImage.url}` }}
             style={styles.mainImage}
             resizeMode="cover"
           />

@@ -61,7 +61,7 @@ export default function FossilsList({ data, isLoading, error }: Props) {
             >
               {frontImage && (
                 <Image
-                  source={{ uri: `http://192.168.1.16:3001/${frontImage.url}` }}
+                  source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${frontImage.url}` }}
                   style={styles.image}
                   resizeMode="cover" 
                 />

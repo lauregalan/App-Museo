@@ -52,7 +52,7 @@ export default function NewDetail() {
       >
         <View style={styles.imageContainer}>
           <Image
-            source={{ uri: `http://192.168.1.16:3001/${data.image}` }}
+            source={{ uri: `${process.env.EXPO_PUBLIC_API_URL}/${data.image}` }}
             style={styles.mainImage}
             resizeMode="cover"
           />
