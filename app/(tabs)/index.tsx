@@ -2,7 +2,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 
 import TextoSeparador from '@/components/TextoSeparador';
-import NewsCarrousel from '@/components/NewsCarrousel';
+import NewsCarrousel from '@/app/NewsCarrousel';
 import { useNews } from '../hooks/useNews';
 
 export default function Home() {

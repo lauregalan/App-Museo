@@ -28,7 +28,6 @@ export default function Register() {
 
   return (
     <View style={styles.container}>
-      <Logo />
 
       <TextoBienvenida title="Crear cuenta" />
 

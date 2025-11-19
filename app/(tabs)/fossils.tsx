@@ -1,6 +1,6 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import { useFossils } from "../hooks/useFossils";
-import FossilsList from "@/components/FossilesList";
+import FossilsList from "@/app/FossilesList";
 
 export default function FossilsScreen() {
   

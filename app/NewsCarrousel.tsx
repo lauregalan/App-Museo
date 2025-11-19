@@ -1,11 +1,12 @@
 import React from "react";
-import { FlatList, View, Text, StyleSheet, Dimensions } from "react-native";
-import NewsCard from "./NewsCard";
-import { Fossil } from "../app/types/Fossils";
+import { FlatList, View, Text, StyleSheet, Dimensions, Pressable } from "react-native";
+import NewsCard from "../components/NewsCard";
+import { Fossil } from "./types/Fossils";
 import { NewsItem } from "@/app/types/newsItem";
+import { router } from "expo-router";
 
 const API_NEWS_URL = "http://192.168.1.19:3001/news";
-const API_BASE_URL = "http://192.168.1.19:3001";
+const API_BASE_URL = "http://192.168.1.16:3001";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const CARD_WIDTH = SCREEN_WIDTH * 0.85;
@@ -41,6 +42,7 @@ export default function NewsCarousel({ data }: Props) {
         horizontal
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
+          <Pressable onPress= {()=> router.push({pathname: "/newdetails", params: { NewsItem: JSON.stringify(item) }})}>
           <NewsCard
             title={item.title}
             date={formatDate(item.date)}
@@ -48,6 +50,8 @@ export default function NewsCarousel({ data }: Props) {
             imageUrl={`${API_BASE_URL}/${item.image}`}
             style={{ width: CARD_WIDTH }}
           />
+          </Pressable>
+
         )}
         showsHorizontalScrollIndicator={false}
         snapToInterval={CARD_WIDTH + SPACING}
