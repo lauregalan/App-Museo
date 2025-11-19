@@ -86,6 +86,15 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
+        name="eventos"
+        options={{
+          title: "Eventos",
+          tabBarIcon: ({ color }) => <TabBarIcon name="ticket" color={color} />,
+        }}
+      />
+
+      
+      <Tabs.Screen
         name="three"
         options={{
           title: "Scann",
@@ -93,13 +102,6 @@ export default function TabLayout() {
         }}
       />
 
-      <Tabs.Screen
-        name="eventos"
-        options={{
-          title: "Eventos",
-          tabBarIcon: ({ color }) => <TabBarIcon name="qrcode" color={color} />,
-        }}
-      />
 
       
       {/*<Tabs.Screen

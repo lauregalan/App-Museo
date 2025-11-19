@@ -57,7 +57,7 @@ export default function VisitsScreen() {
   const handlePress = (item : VisitDate) => {
     if (item.status === 'FULL') return;
     console.log("Reservar fecha:", item.id);
-    // Aquí iría router.push('/confirmar-reserva', { date: ... })
+    router.push({ pathname: '/comprar-entrada', params: { item: JSON.stringify(item) } });
   };
 
   return (
