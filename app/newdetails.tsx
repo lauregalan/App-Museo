@@ -10,7 +10,7 @@ export default function NewDetail() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={{ uri: `http://192.168.1.16:3001/${data.image}` }}
+        source={{ uri: `http://192.168.0.101:3001/${data.image}` }}
         style={styles.mainImage}
       />
 

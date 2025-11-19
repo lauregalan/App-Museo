@@ -14,22 +14,22 @@ export default function SectionTitle() {
 
   const handleLogout = () => {
     setMenuVisible(false);
+    router.replace("/");
     logout();
-    router.replace("/")
     Alert.alert("Cerrar Sesión", "Has cerrado sesión correctamente."); //aca va la logica del logout
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { zIndex: 1000 }]}>
       <Text style={styles.sectionTitle}>Noticias</Text>
 
       <View style={styles.rightContainer}>
+        
         <Pressable onPress={() => setMenuVisible(!menuVisible)}>
-          <Ionicons name="person" size={28} color="black"/>
+          <Ionicons name="person" size={28} color="#fff" />
         </Pressable>
-      </View>
 
-      {menuVisible && (
+        {menuVisible && (
           <View style={styles.dropdownMenu}>
             <Pressable style={styles.menuItem} onPress={handleLogout}>
               <Ionicons name="log-out-outline" size={20} color="red" />
@@ -37,6 +37,7 @@ export default function SectionTitle() {
             </Pressable>
           </View>
         )}
+      </View>
     </View>
   );
 }

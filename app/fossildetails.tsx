@@ -14,7 +14,7 @@ export default function FossilDetail() {
     <ScrollView contentContainerStyle={styles.container}>
       {frontImage && (
         <Image
-          source={{ uri: `http://192.168.1.16:3001/${frontImage.url}` }}
+          source={{ uri: `http://192.168.0.101:3001/${frontImage.url}` }}
           style={styles.mainImage}
         />
       )}
