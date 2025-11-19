@@ -40,19 +40,9 @@ export default function FossilDetail() {
   const frontImage = data.images?.find((img: { isFront: any; }) => img.isFront);
 
   return (
-<<<<<<< HEAD
-    <ScrollView contentContainerStyle={styles.container}>
-      {frontImage && (
-        <Image
-          source={{ uri: `http://192.168.0.101:3001/${frontImage.url}` }}
-          style={styles.mainImage}
-        />
-      )}
-=======
     <View style={styles.mainContainer}>
       {/* Ocultamos el header nativo */}
       <Stack.Screen options={{ headerShown: false }} />
->>>>>>> b8acfe29d23376c7a1ce26ce5f8885c1661530ad
 
       {/* --- IMAGEN DE FONDO (HEADER) --- */}
       <View style={styles.imageHeaderContainer}>
