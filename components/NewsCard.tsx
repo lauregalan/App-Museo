@@ -45,7 +45,7 @@ export default NewsCard;
 
 const styles = StyleSheet.create({
   card: {
-    width: 300,
+    width: "100%",
     backgroundColor: "#fff",
     borderRadius: 0,
     overflow: "hidden",
