@@ -52,14 +52,18 @@ const styleSheet = StyleSheet.create({
   },
   mainText: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 400,
     color: '#333',
+    fontFamily: "CormorantUnicaseBold",
+
   },
   subText: {
     fontSize: 16,
     color: '#666',
     marginTop: -10,
     marginBottom: 10,
+    fontFamily: "CormorantUnicaseBold",
+
   },
   
   imageBtn: {

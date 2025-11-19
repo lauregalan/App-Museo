@@ -41,7 +41,7 @@ export default function FossilsList({ data, isLoading, error }: Props) {
         const frontImage = item.images.find(img => img.isFront);
 
         return (
-          <Animated.View 
+          <Animated.View
             entering={FadeInUp.delay(index * 50).duration(500).springify()}
             // Aplicamos el margen derecho e inferior aquí
             style={[styles.cardWrapper, { 
@@ -123,15 +123,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 500, 
     color: "#1a1a1a",
     marginBottom: 5,
     lineHeight: 22,
+    fontFamily: "CormorantUnicaseBold",
   },
   era: {
     fontSize: 13,
     color: "#888",
     marginBottom: 8,
+    fontFamily: "CormorantUnicaseBold",
   },
   detailsButton: {
     flexDirection: "row",
@@ -144,5 +146,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 14,
     marginRight: 5,
+    fontFamily: "CormorantUnicaseBold",
   },
 });

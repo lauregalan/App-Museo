@@ -8,7 +8,6 @@ export default function QrEscaner(){
     interface Fossil {
     _id: string;
     name: string;
-    // ... puedes agregar más campos si quieres, pero con _id basta para que compile
     }
 
     return (

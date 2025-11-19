@@ -23,5 +23,5 @@ export default function FossilsScreen() {
   }
   if (!data) return null;
 
-  return <FossilsList data={data} />;
+  return <FossilsList  data={data} />;
 }

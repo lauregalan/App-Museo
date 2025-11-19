@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 18,
     fontFamily: "CormorantUnicaseBold",
-    //fontWeight: "bold",
     color: "#333",
   },
   profileButton: {
@@ -160,7 +159,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    // Sombra suave
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
@@ -169,7 +167,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#F0F0F0"
   },
-  // --- Section Styles ---
   sectionHeader: {
     paddingHorizontal: 20,
     marginBottom: 15,

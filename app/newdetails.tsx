@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
   // --- Header Noticia ---
   headerContent: {
     marginBottom: 20,
+
   },
   dateBadge: {
     backgroundColor: "#FFF8F0", // Fondo naranja muy clarito
@@ -186,21 +187,24 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#D98E32", // Naranja Ocre
     letterSpacing: 0.5,
+    fontFamily: "CormorantUnicaseBold",
   },
   title: {
     fontSize: 26,
-    fontWeight: "700",
+    fontWeight: "600",                                                                                    
     color: "#1a1a1a",
     lineHeight: 32,
     letterSpacing: -0.5,
+    fontFamily: "CormorantUnicaseBold",
   },
 
   // --- Cuerpo Texto ---
   textContent: {
     fontSize: 17,
     color: "#4a4a4a",
-    lineHeight: 28,
+    lineHeight: 28,                                                                                                                 
     fontWeight: "400",
+    fontFamily: "CormorantUnicaseBold",
   },
 
   divider: {
@@ -223,6 +227,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     color: "#1a1a1a",
+    fontFamily: "CormorantUnicaseBold",
+
   },
   commentCountBadge: {
     backgroundColor: "#F3F4F6",
@@ -265,11 +271,15 @@ const styles = StyleSheet.create({
   commentTime: {
     fontSize: 12,
     color: "#999",
+        fontFamily: "CormorantUnicaseBold",
+
   },
   commentText: {
     fontSize: 14,
     color: "#555",
     lineHeight: 20,
+        fontFamily: "CormorantUnicaseBold",
+
   },
 
   // --- Input Comentario ---
@@ -303,6 +313,8 @@ const styles = StyleSheet.create({
     maxHeight: 80, // Limite de altura
     paddingTop: 5, 
     paddingBottom: 5,
+    fontFamily: "CormorantUnicaseBold",
+
   },
   sendButton: {
     marginLeft: 10,
