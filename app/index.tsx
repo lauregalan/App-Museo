@@ -17,7 +17,7 @@ export default function Login() {
 
   useEffect(() => {
   if (!loading && isAuthenticated) {
-    {/* router.replace("/(tabs)"); */}
+    router.replace("/(tabs)");
   }
   }, [loading, isAuthenticated]);
 
@@ -40,7 +40,7 @@ export default function Login() {
     >
 
       <TextoBienvenida title="Iniciar sesión"/>
-      <CampoTexto label="Correo Electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={true}/>
+      <CampoTexto label="Correo Electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={false}/>
       <CampoTexto label="Contraseña "placeholder="********" value={password} onChangeText={setPassword} secureTextEntry={true}/>
       <BotonInicioSesion title="Iniciar sesión" onPress={handleLogin} />
       <NoRegistrado />

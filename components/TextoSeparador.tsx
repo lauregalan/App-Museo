@@ -2,14 +2,20 @@ import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import { red } from "react-native-reanimated/lib/typescript/Colors";
+import { useAuth } from "../app/hooks/useAuth"
+import { router } from "expo-router";
 
   
 
 export default function SectionTitle() {
   const [menuVisible, setMenuVisible] = useState(false);
 
+  const {logout} = useAuth();
+
   const handleLogout = () => {
     setMenuVisible(false);
+    logout();
+    router.replace("/")
     Alert.alert("Cerrar Sesión", "Has cerrado sesión correctamente."); //aca va la logica del logout
   };
 
