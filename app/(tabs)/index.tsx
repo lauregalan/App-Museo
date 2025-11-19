@@ -13,20 +13,27 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons"; // Asegúrate de tenerlo instalado
-
 import { useNews } from "../hooks/useNews";
 import NewsCarrousel from "@/app/NewsCarrousel";
+import * as Location from "expo-location";
+import { GEOFENCING_TASK } from "../../tasks/geofencing";
 
 export default function Home() {
   // Suponiendo que tu hook tiene una función refetch, si no, el refresh será visual
   const { data, isLoading, error, refetch } = useNews(); 
   const [refreshing, setRefreshing] = useState(false);
 
-  // Función para obtener la fecha de hoy bonita (ej: "Miércoles, 15 Nov")
+
   const getTodayDate = () => {
-    const options = { weekday: 'long', day: 'numeric', month: 'short' };
-    return new Date().toLocaleDateString('es-AR', options);
+    const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    day: "numeric",
+    month: "short",
   };
+
+  return new Date().toLocaleDateString("es-AR", options);
+};
+
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
