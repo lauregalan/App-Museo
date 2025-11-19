@@ -143,12 +143,14 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 12,
     color: "#888",
-    fontWeight: "600",
+    fontFamily: "CormorantUnicaseBold",
+    //fontWeight: "600",
     letterSpacing: 1,
   },
   greetingText: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "CormorantUnicaseBold",
+    //fontWeight: "bold",
     color: "#333",
   },
   profileButton: {
@@ -174,13 +176,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: "Platform-Serif", // Si tenés la fuente serif cargada, sino usa system default
-    fontWeight: "700",
+    fontFamily: "CormorantUnicaseBold",
+    //fontWeight: "700",
     color: "#1a1a1a",
-    letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 16,
+    fontFamily: "CormorantUnicaseBold",
+    fontSize: 18,
     color: "#666",
     marginTop: 4,
   },
