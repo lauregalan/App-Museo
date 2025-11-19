@@ -17,7 +17,7 @@ export default function Login() {
 
   useEffect(() => {
   if (!loading && isAuthenticated) {
-    router.replace("/(tabs)");
+    {/* router.replace("/(tabs)"); */}
   }
   }, [loading, isAuthenticated]);
 

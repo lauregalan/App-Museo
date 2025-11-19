@@ -64,6 +64,7 @@ export function useAuth() {
     await SecureStore.deleteItemAsync("session_token");
   }
 
+
   return {
     login,
     logout,

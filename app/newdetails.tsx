@@ -13,20 +13,20 @@ import {
 } from "react-native";
 import { useLocalSearchParams, router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import {useComments} from "./hooks/useComments";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
-const FAKE_COMMENTS = [
-  { id: 1, user: "Ana García", text: "¡Qué increíble hallazgo! Me encanta el museo.", time: "Hace 2h", avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d" },
-  { id: 2, user: "Carlos Ruiz", text: "¿Se puede visitar esta exhibición los fines de semana?", time: "Hace 5h", avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
-];
 
 export default function NewDetail() {
   const { NewsItem } = useLocalSearchParams<{ NewsItem: string }>();
   const [commentText, setCommentText] = useState("");
   
+  const {postMessage, error} = useComments()
+
   if (!NewsItem) return null;
   const data = JSON.parse(NewsItem);
+ 
 
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString);
@@ -76,24 +76,44 @@ export default function NewDetail() {
             <View style={styles.commentsHeaderRow}>
               <Text style={styles.sectionTitle}>Comentarios</Text>
               <View style={styles.commentCountBadge}>
-                <Text style={styles.commentCountText}>{FAKE_COMMENTS.length}</Text>
+                <Text style={styles.commentCountText}>{data.comments?.length || 0}</Text>
               </View>
             </View>
 
             <View style={styles.commentsList}>
-              {FAKE_COMMENTS.map((comment) => (
-                <View key={comment.id} style={styles.commentCard}>
-                  <Image source={{ uri: comment.avatar }} style={styles.avatar} />
-                  <View style={{ flex: 1 }}>
-                    <View style={styles.commentUserRow}>
-                      <Text style={styles.commentUser}>{comment.user}</Text>
-                      <Text style={styles.commentTime}>{comment.time}</Text>
+              {Array.isArray(data.comments) && data.comments.length > 0 ? (
+                data.comments.map((comment: any) => (
+                  <View key={comment._id} style={styles.commentCard}>
+                    <Image 
+                      source={{ uri: comment.user?.avatar || "https://i.pravatar.cc/150" }} 
+                      style={styles.avatar} 
+                    />
+
+                    <View style={{ flex: 1 }}>
+                      <View style={styles.commentUserRow}>
+                        <Text style={styles.commentUser}>
+                          {comment.user?.name || "Usuario"}
+                        </Text>
+
+                        <Text style={styles.commentTime}>
+                          {new Date(comment.createdAt).toLocaleDateString("es-AR", {
+                            day: "2-digit",
+                            month: "short",
+                          })}
+                        </Text>
+                      </View>
+
+                      <Text style={styles.commentText}>{comment.text}</Text>
                     </View>
-                    <Text style={styles.commentText}>{comment.text}</Text>
                   </View>
-                </View>
-              ))}
+                ))
+              ) : (
+                <Text style={{ color: "#999", fontSize: 14 }}>
+                  No hay comentarios todavía...
+                </Text>
+              )}
             </View>
+
 
             <View style={styles.inputContainer}>
               <Image 
@@ -110,7 +130,7 @@ export default function NewDetail() {
                   multiline
                 />
                 <Pressable style={styles.sendButton}>
-                  <Ionicons name="send" size={18} color="#D98E32" />
+                  <Ionicons  onPress={() => { postMessage(data._id, commentText); setCommentText("");}} name="send" size={18} color="#D98E32" />
                 </Pressable>
               </View>
             </View>
