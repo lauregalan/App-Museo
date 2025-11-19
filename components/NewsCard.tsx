@@ -86,11 +86,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#6b7280", // gray-500
     marginBottom: 4,
+    fontFamily: "CormorantUnicaseBold",
   },
 
   title: {
     fontSize: 20,
-    fontWeight: "700",
+    fontFamily: "CormorantUnicaseBold",
+    //fontWeight: "700",
     color: "#111827",
     marginBottom: 8,
   },
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#4b5563", // gray-600
     marginBottom: 14,
+    fontFamily: "CormorantUnicaseBold",
     lineHeight: 20,
   },
 
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#d97706", // amber-600
     fontWeight: "600",
+    fontFamily: "CormorantUnicaseBold",
     fontSize: 16,
   },
 });

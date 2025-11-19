@@ -50,10 +50,13 @@ export default function FossilsList({ data, isLoading, error }: Props) {
             }]}
           >
             <Pressable 
-              onPress={() => router.push({ 
+              onPress={() => {
+                //console.log("ARRANCA ACA  ----->" + JSON.stringify(item))
+                router.push({ 
                 pathname: "/fossildetails", 
                 params: { fossil: JSON.stringify(item) } 
               })}
+            }
               style={styles.card} // Aseguramos que la tarjeta ocupe el 100% de su wrapper
             >
               {frontImage && (

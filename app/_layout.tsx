@@ -18,6 +18,12 @@ const queryClient = new QueryClient();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    CormorantUnicaseBold: require('../assets/fonts/CormorantUnicase-Bold.ttf'),
+    CormorantUnicaseSemiBold: require('../assets/fonts/CormorantUnicase-SemiBold.ttf'),
+    CormorantUnicaseMedium: require('../assets/fonts/CormorantUnicase-Medium.ttf'),
+    CormorantUnicaseLight: require('../assets/fonts/CormorantUnicase-Light.ttf'),
+    CormorantUnicaseRegular: require('../assets/fonts/CormorantUnicase-Regular.ttf'),
+    //Montserrat: require('../assets/fonts/Montserrat-Variable.woff2'), si se necesita hay que descargar la version ttf
     ...FontAwesome.font,
   });
 
