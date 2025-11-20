@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import { Text } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import * as Location from "expo-location";
+import BotonRecordar from "@/components/BotonRecordar";
 
 const requestPermissions = async () => {
   const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
@@ -24,25 +25,32 @@ const requestPermissions = async () => {
 
 export default function Login() {
 
-  const {login, loading, error, isAuthenticated, logout} = useAuth()
+  const {login, loading, error, isAuthenticated, logout, isRemember} = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const colors = useThemeColor();
 
 
   useEffect(() => {
-
     if (!loading && isAuthenticated) {
-      router.replace("/(tabs)"); // redirige a la pantalla principal
+      router.replace("/(tabs)");
+      console.log(isRemember)
     }
-  }, [loading, isAuthenticated]);
+  }, [loading, isAuthenticated, isRemember]);
 
   const handleLogin = async () => {
+    
     const res = await login(email, password)
     
     if(res){
       router.push("/(tabs)");
     }
+  }
+
+
+  const handleInvitado = () => {
+    router.push("/(tabs)");
+    
   }
 
   return (
@@ -59,6 +67,8 @@ export default function Login() {
       <CampoTexto label="Correo Electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={false}/>
       <CampoTexto label="Contraseña "placeholder="********" value={password} onChangeText={setPassword} secureTextEntry={true}/>
       <BotonInicioSesion title="Iniciar sesión" onPress={handleLogin} />
+      <BotonInicioSesion title="Iniciar como invitado" onPress={handleInvitado} />
+      <BotonRecordar></BotonRecordar>
       <NoRegistrado />
       {error && (
         <Text style={{ color: "red" }}>

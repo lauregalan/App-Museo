@@ -196,10 +196,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: "700",
+    fontWeight: "400",
     color: "#1a1a1a",
     marginBottom: 25,
     letterSpacing: -0.5,
+    fontFamily: "CormorantUnicaseBold",
+
   },
   
   // --- Grid de Información ---
@@ -228,14 +230,18 @@ const styles = StyleSheet.create({
   infoLabel: {
     fontSize: 12,
     color: "#888",
-    fontWeight: "600",
+    fontWeight: "400",
     textTransform: "uppercase",
     marginBottom: 2,
+    fontFamily: "CormorantUnicaseBold",
+
   },
   infoValue: {
     fontSize: 15,
     color: "#333",
-    fontWeight: "500",
+    fontWeight: "300",
+        fontFamily: "CormorantUnicaseBold",
+
   },
 
   // --- Texto ---
@@ -246,14 +252,18 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: "400",
     color: "#1a1a1a",
     marginBottom: 10,
+        fontFamily: "CormorantUnicaseBold",
+
   },
   textContent: {
     fontSize: 16,
     color: "#555", // Gris oscuro para lectura
     lineHeight: 26,
     fontWeight: "400",
+        fontFamily: "CormorantUnicaseBold",
+
   },
 });

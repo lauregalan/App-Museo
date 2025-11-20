@@ -6,10 +6,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import { useColorScheme } from "@/hooks/useColorScheme";
-
 export { ErrorBoundary } from "expo-router";
+import {OneSignal, LogLevel} from 'react-native-onesignal';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,10 +44,19 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+
   const colorScheme = useColorScheme();
 
+  useEffect(() => {
+
+
+    OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+    OneSignal.initialize("2c37e609-30dd-455e-a500-83d0219cfd83");
+    OneSignal.Notifications.requestPermission(false);
+  }, []);
+
   return (
-<QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />

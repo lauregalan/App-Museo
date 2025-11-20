@@ -17,13 +17,32 @@ import { useNews } from "../hooks/useNews";
 import NewsCarrousel from "@/app/NewsCarrousel";
 import * as Location from "expo-location";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useAuth } from "../hooks/useAuth";
+import { router } from "expo-router";
 //import { GEOFENCING_TASK } from "../../tasks/geofencing";
 
 export default function Home() {
-  // Suponiendo que tu hook tiene una función refetch, si no, el refresh será visual
+  
   const { data, isLoading, error, refetch } = useNews(); 
   const [refreshing, setRefreshing] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false); 
+  const { logout, isAuthenticated } = useAuth(); 
+  
+  const handleLogout = async () => {
+    await logout(); 
+    setMenuVisible(false);
+    router.dismissAll();
+    console.log("Auth:", { isAuthenticated });
 
+  };
+
+  const handleLogin = () => {
+    setMenuVisible(false);
+    router.dismissAll();
+    console.log("Auth:", { isAuthenticated });
+  };
+
+  const toggleMenu = () => setMenuVisible(!menuVisible);
 
   const getTodayDate = () => {
     const options: Intl.DateTimeFormatOptions = {
@@ -33,17 +52,16 @@ export default function Home() {
   };
 
   return new Date().toLocaleDateString("es-AR", options);
+
 };
 
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    if (refetch) await refetch(); // Si tu hook soporta refetch
-    // Simulamos una espera si no hay refetch real
+    if (refetch) await refetch(); 
     setTimeout(() => setRefreshing(false), 1500);
   }, [refetch]);
 
-  // --- ESTADO DE CARGA ---
   if (isLoading && !refreshing) {
     return (
       <View style={styles.center}>
@@ -53,7 +71,6 @@ export default function Home() {
     );
   }
 
-  // --- ESTADO DE ERROR ---
   if (error) {
     return (
       <View style={styles.center}>
@@ -71,7 +88,6 @@ export default function Home() {
   const colors = useThemeColor()
   return (
     <LinearGradient
-      // Un degradado sutil: Blanco arriba -> Gris cálido muy suave abajo
       colors={[colors.superLight, colors.background]} 
       style={{ flex: 1 }}
     >
@@ -88,7 +104,6 @@ export default function Home() {
             />
           }
         >
-          {/* --- HEADER SUPERIOR --- */}
           <View style={styles.topBar}>
             <View>
               <Text style={[styles.dateText, {color: colors.secondary}]}>{getTodayDate().toUpperCase()}</Text>
@@ -96,25 +111,51 @@ export default function Home() {
             </View>
             
             {/* Botón de Perfil o Menú */}
-            <Pressable style={[styles.profileButton,]}>
+            <Pressable onPress={toggleMenu} style={[styles.profileButton,]}>
                <Ionicons name="person" size={20} color="#D98E32"/>
             </Pressable>
           </View>
 
-          {/* --- TÍTULO DE SECCIÓN --- */}
+            {/* --- MENÚ FLOTANTE (CONDICIONAL) --- */}
+                {menuVisible && (
+                    <View style={styles.dropdownMenu}>
+                        {isAuthenticated ? (
+                            // Si hay usuario logueado
+                            <>
+                                <View style={styles.menuHeader}>
+                                    <Text style={styles.menuUserText} numberOfLines={1}>
+                                        Usuario simona!
+                                    </Text>
+                                </View>
+                                <View style={styles.divider} />
+                                <Pressable onPress={handleLogout} style={styles.menuItem}>
+                                    <Ionicons name="log-out-outline" size={18} color="#D32F2F" />
+                                    <Text style={[styles.menuItemText, { color: "#D32F2F" }]}>
+                                        Cerrar Sesión
+                                    </Text>
+                                </Pressable>
+                            </>
+                        ) : (
+                            // Si NO hay usuario (invitado)
+                            <Pressable onPress={handleLogin} style={styles.menuItem}>
+                                <Ionicons name="log-in-outline" size={18} color="#D98E32" />
+                                <Text style={styles.menuItemText}>Iniciar Sesión</Text>
+                            </Pressable>
+                        )}
+                    </View>
+                )}
+
           <View style={styles.sectionHeader}>
             <Text style={[styles.title, {color: colors.text}]}>Novedades</Text>
             <Text style={[styles.subtitle, {color: colors.secondary}]}>Lo último del museo para vos</Text>
           </View>
 
-          {/* --- CARRUSEL CON ANIMACIÓN --- */}
           {data && (
             <Animated.View entering={FadeInDown.duration(600).springify()}>
               <NewsCarrousel data={data} />
             </Animated.View>
           )}
           
-          {/* Espacio extra abajo para que no se corte */}
           <View style={{ height: 100 }} />
 
         </ScrollView>
@@ -141,6 +182,53 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     marginBottom: 10,
+  },
+
+  // --- ESTILOS DEL MENÚ FLOTANTE ---
+  dropdownMenu: {
+    position: 'absolute',
+    top: 50, // Justo debajo del botón
+    right: 0, // Alineado a la derecha
+    width: 200,
+    backgroundColor: 'white',
+    borderRadius: 12,
+    paddingVertical: 8,
+    // Sombra fuerte para que "flote"
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 10,
+    borderWidth: 1,
+    borderColor: "#EEE",
+    zIndex: 1000, // Súper importante para que quede arriba
+  },
+  menuHeader: {
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+  },
+  menuUserText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#555",
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    gap: 10,
+  },
+  menuItemText: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#333",
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#F0F0F0",
+    width: "100%",
+    marginVertical: 4,
   },
   dateText: {
     fontSize: 12,
