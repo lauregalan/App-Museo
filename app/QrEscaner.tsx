@@ -12,6 +12,7 @@ export default function QrEscaner(){
     }
 
     const colors = useThemeColor()
+    let scanning = true
     return (
         <View style={{
             backgroundColor: colors.background,
@@ -36,16 +37,20 @@ export default function QrEscaner(){
 
                     onBarcodeScanned={
                         async ({ data }) => {
-                            //console.log(data); // en data voy a obtener el id de un fosil en especifico
-                            //const ans = await fetch("http://192.168.0.101:3001/fossils/" + data );
-                            const ans = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/fossils/${data}` );
-                            const fosiles = await ans.json()
-                            //console.log(fosiles)
+                            if (scanning) {
+                                scanning = false
 
-                            router.push({ 
-                                pathname: "/fossildetails", 
-                                params: { fossil: JSON.stringify(fosiles) } 
-                            })
+                                //console.log(data); // en data voy a obtener el id de un fosil en especifico
+                                //const ans = await fetch("http://192.168.0.101:3001/fossils/" + data );
+                                const ans = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/fossils/${data}` );
+                                const fosiles = await ans.json()
+                                //console.log(fosiles)
+                                router.back()
+                                router.push({ 
+                                    pathname: "/fossildetails", 
+                                    params: { fossil: JSON.stringify(fosiles) } 
+                                })
+                            }
                         }
                     }
                 />

@@ -12,11 +12,7 @@ export function useAuth() {
     const checkToken = async () => {
       const token = await SecureStore.getItemAsync("session_token");
 
-      if (token) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
+      setIsAuthenticated(!!token);
 
       setLoading(false);
     };
@@ -49,6 +45,7 @@ export function useAuth() {
 
       if (token) {
         await SecureStore.setItemAsync("session_token", token);
+        setIsAuthenticated(true);
       }
 
       return true;
@@ -62,6 +59,7 @@ export function useAuth() {
 
   async function logout() {
     await SecureStore.deleteItemAsync("session_token");
+    setIsAuthenticated(false)
   }
 
 

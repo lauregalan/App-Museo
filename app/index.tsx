@@ -34,15 +34,23 @@ export default function Login() {
 
     if (!loading && isAuthenticated) {
       router.replace("/(tabs)"); // redirige a la pantalla principal
-    }
+    } 
+    
   }, [loading, isAuthenticated]);
 
   const handleLogin = async () => {
+    
     const res = await login(email, password)
     
     if(res){
       router.push("/(tabs)");
     }
+  }
+
+
+  const handleInvitado = () => {
+    router.push("/(tabs)");
+    
   }
 
   return (
@@ -59,6 +67,8 @@ export default function Login() {
       <CampoTexto label="Correo Electronico" placeholder="ejemplo@correo.com" value={email} onChangeText={setEmail} secureTextEntry={false}/>
       <CampoTexto label="Contraseña "placeholder="********" value={password} onChangeText={setPassword} secureTextEntry={true}/>
       <BotonInicioSesion title="Iniciar sesión" onPress={handleLogin} />
+      <BotonInicioSesion title="Iniciar como invitado" onPress={handleInvitado} />
+
       <NoRegistrado />
       {error && (
         <Text style={{ color: "red" }}>
