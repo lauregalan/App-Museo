@@ -7,9 +7,11 @@ export default function TextoBienvenida({ title = "Bienvenido" }) {
 const styles = StyleSheet.create({
   title: {
     fontSize: 32,
-    fontWeight: "bold",
+    fontWeight: "400",
     marginBottom: 24,
     textAlign: "left",
     width: "85%",
+    fontFamily: "CormorantUnicaseBold",
+
   }
 }); 
