@@ -6,15 +6,19 @@ export function useAuth() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+  const [isRemember, setIsRemember] = useState(false);
 
   useEffect(() => {
     const checkToken = async () => {
       const token = await SecureStore.getItemAsync("session_token");
 
       setIsAuthenticated(!!token);
+      // Leer remember
+      const remember = await SecureStore.getItemAsync("remember_me");
+      setIsRemember(remember === "true");
 
       setLoading(false);
+
     };
 
     checkToken();
@@ -59,9 +63,15 @@ export function useAuth() {
 
   async function logout() {
     await SecureStore.deleteItemAsync("session_token");
+        await SecureStore.deleteItemAsync("remember_me");
     setIsAuthenticated(false)
+        setIsRemember(false);
   }
 
+  async function remembering(value: boolean) {
+    setIsRemember(value);
+    await SecureStore.setItemAsync("remember_me", value ? "true" : "false");
+  }
 
   return {
     login,
@@ -69,5 +79,7 @@ export function useAuth() {
     loading,
     error,
     isAuthenticated,
+    isRemember,
+    remembering
   };
 }

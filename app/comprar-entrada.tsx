@@ -12,11 +12,14 @@ import { useLocalSearchParams, router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import { useBiometricAuth } from "./hooks/useBiometricAuth";
 
 export default function BuyTicketScreen() {
   // Recibimos el item seleccionado de la pantalla anterior
   const params = useLocalSearchParams();
   
+  const {authenticate} = useBiometricAuth()
+
   // Parseamos el objeto (si existe)
   const item = params.item ? JSON.parse(params.item as string) : null;
 
@@ -31,7 +34,12 @@ export default function BuyTicketScreen() {
       ]
     );
   };
-
+  const handlePress = async () => {
+    const ok = await authenticate(); // dispara la biometría
+    if (ok) {
+      handleConfirmPayment(); // solo confirma el pago si pasó la verificación
+    }
+  };
   const colors = useThemeColor()
   return (
     <View style={[styles.mainContainer, {backgroundColor: colors.background}]}>
@@ -114,7 +122,7 @@ export default function BuyTicketScreen() {
       <View style={[styles.footer, {backgroundColor: colors.background}]}>
         <Pressable 
             style={({pressed}) => [styles.payButton, pressed && { opacity: 0.9 }]}
-            onPress={handleConfirmPayment}
+            onPress={handlePress}
         >
             <Text style={styles.payButtonText}>YA REALICÉ EL PAGO</Text>
             <Ionicons name="checkmark-circle-outline" size={22} color="#fff" style={{marginLeft: 8}}/>
