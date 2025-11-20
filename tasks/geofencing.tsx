@@ -1,31 +1,28 @@
-import * as TaskManager from "expo-task-manager";
-import * as Location from "expo-location";
+import * as TaskManager from 'expo-task-manager';
+import * as Location from 'expo-location';
+import * as Notifications from 'expo-notifications';
 
-type GeofenceTaskData = {
-  eventType: Location.GeofencingEventType;
-  region: {
-    identifier: string;
-    latitude: number;
-    longitude: number;
-    radius: number;
-  };
-};
+const GEOFENCE_TASK = "GEOFENCE_TASK";
 
-const GEOFENCING_TASK = "GEOFENCING_TASK";
-
-TaskManager.defineTask("GEOFENCE_TASK", async ({ data   , error }) => {
+TaskManager.defineTask(GEOFENCE_TASK, async ({ data, error }) => {
   if (error) {
-    console.error("Error en geofencing:", error);
+    console.error(error);
     return;
   }
 
-  const { eventType, region } = data as GeofenceTaskData;
+  if (data) {
+    const { eventType, region } = data as any;
 
-  if (eventType === Location.GeofencingEventType.Enter) {
-    console.log("Entraste al área:", region.identifier);
-  } else if (eventType === Location.GeofencingEventType.Exit) {
-    console.log("Saliste del área:", region.identifier);
+    if (eventType === Location.GeofencingEventType.Enter) {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "¡Bienvenido al Museo!",
+          body: "Disfrutá la experiencia interactiva 😊",
+        },
+        trigger: null, // dispara de inmediato
+      });
+    }
   }
 });
 
-export { GEOFENCING_TASK };
+export const geofencingTaskName = "GEOFENCE_TASK";
