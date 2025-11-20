@@ -16,7 +16,6 @@ import { Ionicons } from "@expo/vector-icons"; // Asegúrate de tenerlo instalad
 import { useNews } from "../hooks/useNews";
 import NewsCarrousel from "@/app/NewsCarrousel";
 import * as Location from "expo-location";
-import { GEOFENCING_TASK } from "../../tasks/geofencing";
 
 export default function Home() {
   // Suponiendo que tu hook tiene una función refetch, si no, el refresh será visual
