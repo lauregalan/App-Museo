@@ -17,5 +17,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     textAlign: "left",
     width: "85%",
+    fontFamily: "CormorantUnicaseBold",
+
   }
 });

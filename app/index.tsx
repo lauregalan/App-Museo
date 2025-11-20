@@ -9,6 +9,18 @@ import { useAuth } from "./hooks/useAuth";
 import { useState, useEffect } from "react";
 import { Text } from "react-native";
 import { useThemeColor } from "@/hooks/useThemeColor";
+import * as Location from "expo-location";
+
+const requestPermissions = async () => {
+  const { status: foregroundStatus } = await Location.requestForegroundPermissionsAsync();
+  const { status: backgroundStatus } = await Location.requestBackgroundPermissionsAsync();
+
+  if (foregroundStatus !== 'granted' || backgroundStatus !== 'granted') {
+    alert('No se pudieron obtener los permisos de ubicación');
+    return false;
+  }
+  return true;
+};
 
 export default function Login() {
 
@@ -17,10 +29,12 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const colors = useThemeColor();
 
+
   useEffect(() => {
-  if (!loading && isAuthenticated) {
-    {/* router.replace("/(tabs)"); */}
-  }
+
+    if (!loading && isAuthenticated) {
+      router.replace("/(tabs)"); // redirige a la pantalla principal
+    }
   }, [loading, isAuthenticated]);
 
   const handleLogin = async () => {
