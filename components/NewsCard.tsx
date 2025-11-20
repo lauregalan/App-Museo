@@ -1,5 +1,6 @@
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
 import { Link } from "expo-router";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 interface NewsCardProps {
   title: string;
@@ -16,8 +17,9 @@ const NewsCard = ({
   imageUrl,
   style = {},
 }: NewsCardProps) => {
+  const colors = useThemeColor()
   return (
-    <View style={[styles.card, style]}>
+    <View style={[styles.card, style, {backgroundColor: colors.darklight}]}>
       <View style={styles.imageWrapper}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
         {/* OVERLAY suave para que el texto nunca compita con la imagen */}
@@ -25,10 +27,10 @@ const NewsCard = ({
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.date}>{date}</Text>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.date, {color: colors.secondary}]}>{date}</Text>
+        <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
 
-        <Text style={styles.summary} numberOfLines={3}>
+        <Text style={[styles.summary, {color: colors.secondary}]} numberOfLines={3}>
           {summary}
         </Text>
 

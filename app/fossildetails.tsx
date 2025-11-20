@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import { useLocalSearchParams, router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { useTheme } from "@react-navigation/native";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -20,17 +22,19 @@ interface InfoBadgeProps {
   value: string | number | undefined | null;
 }
 // Componente auxiliar para los datos técnicos (Icono + Título + Valor)
-const InfoBadge = ({ icon, label, value } : InfoBadgeProps) => (
-  <View style={styles.infoBadge}>
+const InfoBadge = ({ icon, label, value } : InfoBadgeProps) => {
+  const colors = useThemeColor()
+  return(
+  <View style={[styles.infoBadge, {backgroundColor: colors.background}]}>
     <View style={styles.iconContainer}>
       <Ionicons name={icon} size={22} color="#D98E32" />
     </View>
     <View style={{ flex: 1 }}>
-      <Text style={styles.infoLabel}>{label}</Text>
-      <Text style={styles.infoValue}>{value || "No especificado"}</Text>
+      <Text style={[styles.infoLabel, {color: colors.secondary}]}>{label}</Text>
+      <Text style={[styles.infoValue, {color: colors.text}]}>{value || "No especificado"}</Text>
     </View>
   </View>
-);
+)};
 
 export default function FossilDetail() {
   const { fossil } = useLocalSearchParams<{ fossil: string }>();
@@ -39,6 +43,7 @@ export default function FossilDetail() {
   const data = JSON.parse(fossil);
   const frontImage = data.images?.find((img: { isFront: any; }) => img.isFront);
 
+  const colors = useThemeColor()
   return (
     <View style={styles.mainContainer}>
       {/* Ocultamos el header nativo */}
@@ -76,12 +81,12 @@ export default function FossilDetail() {
         {/* Espaciador invisible para revelar la imagen */}
         <View style={{ height: SCREEN_HEIGHT * 0.4 }} />
 
-        <View style={styles.sheetContainer}>
+        <View style={[styles.sheetContainer, {backgroundColor: colors.background}]}>
           {/* Decoración Handle */}
           <View style={styles.dragHandle} />
 
           {/* Título Principal */}
-          <Text style={styles.title}>{data.name}</Text>
+          <Text style={[styles.title, {color: colors.text}]}>{data.name}</Text>
           
           {/* Fila de Datos Clave (Edad y Ubicación) */}
           <View style={styles.gridContainer}>
@@ -89,7 +94,7 @@ export default function FossilDetail() {
               <InfoBadge 
                 icon="time-outline" 
                 label="Antigüedad" 
-                value={data.age} 
+                value={data.age}
               />
             )}
             {data.location && (
@@ -110,8 +115,8 @@ export default function FossilDetail() {
 
           <View style={styles.divider} />
 
-          <Text style={styles.sectionTitle}>Descripción Científica</Text>
-          <Text style={styles.textContent}>{data.description}</Text>
+          <Text style={[styles.sectionTitle, {color: colors.text}]}>Descripción Científica</Text>
+          <Text style={[styles.textContent, {color: colors.secondary}]}>{data.description}</Text>
 
           {/* Espacio final */}
           <View style={{ height: 40 }} />

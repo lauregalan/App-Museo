@@ -16,7 +16,8 @@ import { Ionicons } from "@expo/vector-icons"; // Asegúrate de tenerlo instalad
 import { useNews } from "../hooks/useNews";
 import NewsCarrousel from "@/app/NewsCarrousel";
 import * as Location from "expo-location";
-import { GEOFENCING_TASK } from "../../tasks/geofencing";
+import { useThemeColor } from "@/hooks/useThemeColor";
+//import { GEOFENCING_TASK } from "../../tasks/geofencing";
 
 export default function Home() {
   // Suponiendo que tu hook tiene una función refetch, si no, el refresh será visual
@@ -67,10 +68,11 @@ export default function Home() {
     );
   }
 
+  const colors = useThemeColor()
   return (
     <LinearGradient
       // Un degradado sutil: Blanco arriba -> Gris cálido muy suave abajo
-      colors={["#FFFFFF", "#F9F5F0"]} 
+      colors={[colors.superLight, colors.background]} 
       style={{ flex: 1 }}
     >
       <SafeAreaView style={styles.container} edges={["top"]}>
@@ -89,20 +91,20 @@ export default function Home() {
           {/* --- HEADER SUPERIOR --- */}
           <View style={styles.topBar}>
             <View>
-              <Text style={styles.dateText}>{getTodayDate().toUpperCase()}</Text>
-              <Text style={styles.greetingText}>Hola, Visitante</Text>
+              <Text style={[styles.dateText, {color: colors.secondary}]}>{getTodayDate().toUpperCase()}</Text>
+              <Text style={[styles.greetingText, {color: colors.text}]}>Hola, Visitante</Text>
             </View>
             
             {/* Botón de Perfil o Menú */}
-            <Pressable style={styles.profileButton}>
-               <Ionicons name="person" size={20} color="#D98E32" />
+            <Pressable style={[styles.profileButton,]}>
+               <Ionicons name="person" size={20} color="#D98E32"/>
             </Pressable>
           </View>
 
           {/* --- TÍTULO DE SECCIÓN --- */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.title}>Novedades</Text>
-            <Text style={styles.subtitle}>Lo último del museo para vos</Text>
+            <Text style={[styles.title, {color: colors.text}]}>Novedades</Text>
+            <Text style={[styles.subtitle, {color: colors.secondary}]}>Lo último del museo para vos</Text>
           </View>
 
           {/* --- CARRUSEL CON ANIMACIÓN --- */}
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 12,
-    color: "#888",
+    //color: "#888",
     fontFamily: "CormorantUnicaseBold",
     //fontWeight: "600",
     letterSpacing: 1,

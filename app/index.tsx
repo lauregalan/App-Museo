@@ -8,12 +8,14 @@ import TextoBienvenida from "../components/TextoBienvenida";
 import { useAuth } from "./hooks/useAuth";
 import { useState, useEffect } from "react";
 import { Text } from "react-native";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export default function Login() {
 
   const {login, loading, error, isAuthenticated, logout} = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const colors = useThemeColor();
 
   useEffect(() => {
   if (!loading && isAuthenticated) {
@@ -35,7 +37,7 @@ export default function Login() {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#fff",
+        backgroundColor: colors.background,
       }}
     >
 

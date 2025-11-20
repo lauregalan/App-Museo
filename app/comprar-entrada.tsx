@@ -11,9 +11,10 @@ import {
 import { useLocalSearchParams, router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 export default function BuyTicketScreen() {
-  // 1. Recibimos el item seleccionado de la pantalla anterior
+  // Recibimos el item seleccionado de la pantalla anterior
   const params = useLocalSearchParams();
   
   // Parseamos el objeto (si existe)
@@ -31,8 +32,9 @@ export default function BuyTicketScreen() {
     );
   };
 
+  const colors = useThemeColor()
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, {backgroundColor: colors.background}]}>
       <StatusBar style="dark" />
       <Stack.Screen options={{ headerShown: false }} />
 
@@ -41,7 +43,7 @@ export default function BuyTicketScreen() {
         <Pressable onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
         </Pressable>
-        <Text style={styles.headerTitle}>FINALIZAR COMPRA</Text>
+        <Text style={[styles.headerTitle, {color: colors.text}]}>FINALIZAR COMPRA</Text>
         <View style={{ width: 40 }} /> 
       </View>
 
@@ -49,20 +51,20 @@ export default function BuyTicketScreen() {
         
         {/* --- TARJETA DE RESUMEN (FECHA) --- */}
         <View style={styles.introContainer}>
-          <Text style={styles.sectionTitle}>Detalle de la visita</Text>
-          <Text style={styles.introText}>
+          <Text style={[styles.sectionTitle, {color: colors.text}]}>Detalle de la visita</Text>
+          <Text style={[styles.introText, {color: colors.secondary}]}>
              Estás a un paso de confirmar tu lugar. Revisa los datos antes de pagar.
           </Text>
         </View>
 
-        <View style={styles.summaryCard}>
+        <View style={[styles.summaryCard, {backgroundColor: colors.darklight}]}>
           <View style={styles.dateRow}>
             <View style={styles.calendarIcon}>
-               <Ionicons name="calendar-outline" size={24} color="#D98E32" />
+               <Ionicons name="calendar-outline" size={24} color="#D98E32"/>
             </View>
             <View>
-                <Text style={styles.label}>FECHA SELECCIONADA</Text>
-                <Text style={styles.valueBig}>
+                <Text style={[styles.label, {color: colors.secondary}]}>FECHA SELECCIONADA</Text>
+                <Text style={[styles.valueBig, {color: colors.text}]}>
                     {item.dayName} {item.dayNumber} DE {item.month}
                 </Text>
             </View>
@@ -72,11 +74,11 @@ export default function BuyTicketScreen() {
 
           <View style={styles.detailsRow}>
              <View style={styles.detailItem}>
-                <Text style={styles.label}>HORARIO</Text>
-                <Text style={styles.valueSmall}>{item.hours}</Text>
+                <Text style={[styles.label, {color: colors.secondary}]}>HORARIO</Text>
+                <Text style={[styles.valueSmall, {color: colors.darktext}]}>{item.hours}</Text>
              </View>
              <View style={styles.detailItem}>
-                <Text style={styles.label}>VALOR ENTRADA</Text>
+                <Text style={[styles.label, {color: colors.secondary}]}>VALOR ENTRADA</Text>
                 <Text style={[styles.valueSmall, { color: "#D98E32" }]}>$2.500,00</Text>
              </View>
           </View>
@@ -84,8 +86,8 @@ export default function BuyTicketScreen() {
 
         {/* --- SECCIÓN QR --- */}
         <View style={styles.qrSection}>
-            <Text style={styles.qrTitle}>Escaneá para pagar</Text>
-            <Text style={styles.qrSubtitle}>
+            <Text style={[styles.qrTitle, {color: colors.text}]}>Escaneá para pagar</Text>
+            <Text style={[styles.qrSubtitle, {color: colors.secondary}]}>
                 Utilizá tu billetera virtual favorita para escanear el código QR.
             </Text>
 
@@ -100,7 +102,7 @@ export default function BuyTicketScreen() {
                 <View style={styles.cornerBR} />
             </View>
 
-            <View style={styles.secureBadge}>
+            <View style={[styles.secureBadge, {backgroundColor: colors.darkstring}]}>
                 <Ionicons name="shield-checkmark-outline" size={16} color="#10B981" />
                 <Text style={styles.secureText}>Pago 100% seguro</Text>
             </View>
@@ -109,7 +111,7 @@ export default function BuyTicketScreen() {
       </ScrollView>
 
       {/* --- FOOTER (BOTÓN) --- */}
-      <View style={styles.footer}>
+      <View style={[styles.footer, {backgroundColor: colors.background}]}>
         <Pressable 
             style={({pressed}) => [styles.payButton, pressed && { opacity: 0.9 }]}
             onPress={handleConfirmPayment}

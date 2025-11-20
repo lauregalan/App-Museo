@@ -4,6 +4,7 @@ import NewsCard from "../components/NewsCard";
 import { Fossil } from "./types/Fossils";
 import { NewsItem } from "@/app/types/newsItem";
 import { router } from "expo-router";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 const API_NEWS_URL = `${process.env.EXPO_PUBLIC_API_URL}/news`;
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
@@ -35,8 +36,9 @@ export default function NewsCarousel({ data }: Props) {
     }).format(date);
   }
 
+  const colors = useThemeColor()
   return (
-    <View style={{ marginTop: 20 }}>
+    <View style={{ marginTop: 20, backgroundColor: colors.background}}>
       <FlatList
         data={data}
         horizontal

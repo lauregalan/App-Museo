@@ -1,11 +1,13 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
+import { useThemeColor } from "../hooks/useThemeColor";
 
 export default function BotonInicioSesion({
   title = "Iniciar sesión",
   onPress,
   isPrimary = true,  
 }) {
+  const colores = useThemeColor()
   return (
     <Pressable
       onPress={onPress}
@@ -15,7 +17,7 @@ export default function BotonInicioSesion({
         pressed && styles.pressed,
       ]}
     >
-      <Text style={[styles.text, !isPrimary && styles.textSecondary]}>
+      <Text style={[styles.text,!isPrimary && styles.textSecondary && {color: colores.secondary}]}>
         {title}
       </Text>
     </Pressable>
@@ -45,13 +47,15 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: 18,
+    //fontWeight: "bold",
+    fontFamily: "CormorantUnicaseBold",
     textTransform: "uppercase", // La imagen usa mayúsculas en el botón
   },
   textSecondary: {
+    fontFamily: "CormorantUnicaseBold",
     color: "#333", // Texto oscuro para el botón de registro
     textTransform: "none", // "Registrate aquí" no está todo en mayúsculas
-    fontWeight: "600",
+    //fontWeight: "600",
   },
 });
