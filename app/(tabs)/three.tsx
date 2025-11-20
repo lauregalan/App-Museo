@@ -1,3 +1,4 @@
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { useCameraPermissions } from 'expo-camera';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -17,18 +18,20 @@ export default function three() {
      }
   };
 
+  const colors = useThemeColor()
   return (
-    <SafeAreaView style={styleSheet.container}>
+    <SafeAreaView style={[styleSheet.container, {backgroundColor: colors.background}]}>
       <StatusBar style="auto" />
 
-      <Text style={styleSheet.mainText}>Expo QR Code Scanner</Text>
-      <Text style={styleSheet.subText}>Toca la imagen para escanear</Text>
+      <Text style={[styleSheet.mainText, {color: colors.text}]}>Expo QR Code Scanner</Text>
+      <Text style={[styleSheet.subText, {color: colors.secondary}]}>Toca la imagen para escanear</Text>
 
       <Pressable 
         onPress={handleScanPress}
         // Usamos una funcion para cambiar el estilo si esta presionado
         style={({ pressed }) => [
-          styleSheet.imageBtn, 
+          styleSheet.imageBtn,
+          {backgroundColor: colors.darklight},
           pressed && styleSheet.btnPressed // Si se presiona, aplica esto
         ]}
       >

@@ -10,6 +10,8 @@ import {
 import { router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { useTheme } from "@react-navigation/native";
 
 {/* hardcodeado de momento, no hay nada en la API jaja*/ }
 const AVAILABLE_DATES : VisitDate[]= [
@@ -44,6 +46,7 @@ const StatusBadge = ({ status } : {status : string}) => {
     bg = "#FEF2F2";
   }
 
+  const colors = useThemeColor()
   return (
     <View style={[styles.badge, { backgroundColor: bg, borderColor: color }]}>
       <View style={[styles.badgeDot, { backgroundColor: color }]} />
@@ -60,19 +63,20 @@ export default function VisitsScreen() {
     router.push({ pathname: '/comprar-entrada', params: { item: JSON.stringify(item) } });
   };
 
+  const colors = useThemeColor()
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, {backgroundColor: colors.background}]}>
       <StatusBar style="dark" />
       <Stack.Screen options={{ headerShown: false }} />
 
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>VISITAS</Text>
+        <Text style={[styles.headerTitle, {color: colors.text}]}>VISITAS</Text>
         <View style={{ width: 40 }} /> 
       </View>
 
       <View style={styles.introContainer}>
-        <Text style={styles.introTitle}>Planifica tu recorrido</Text>
-        <Text style={styles.introText}>
+        <Text style={[styles.introTitle, {color: colors.secondary}]}>Planifica tu recorrido</Text>
+        <Text style={[styles.introText, {color: colors.secondary}]}>
           Seleccioná una fecha para reservar tu entrada y evitar filas.
         </Text>
       </View>
@@ -85,22 +89,23 @@ export default function VisitsScreen() {
         renderItem={({ item }) => (
           <Pressable 
             style={({ pressed }) => [
-              styles.card, 
+              styles.card,
+              {backgroundColor: colors.darklight},
               item.status === 'FULL' && styles.cardDisabled,
               pressed && styles.cardPressed
             ]}
             onPress={() => handlePress(item)}
           >
             {/* Columna Izquierda: Calendario Visual */}
-            <View style={styles.dateBlock}>
+            <View style={[styles.dateBlock, {backgroundColor: colors.background}]}>
               <Text style={styles.monthText}>{item.month}</Text>
-              <Text style={styles.dayNumberText}>{item.dayNumber}</Text>
+              <Text style={[styles.dayNumberText, {color: colors.secondary}]}>{item.dayNumber}</Text>
             </View>
 
             {/* Columna Central: Info */}
             <View style={styles.infoBlock}>
-              <Text style={styles.dayNameText}>{item.dayName}</Text>
-              <Text style={styles.hoursText}>Horario: {item.hours}</Text>
+              <Text style={[styles.dayNameText, {color: colors.text}]}>{item.dayName}</Text>
+              <Text style={[styles.hoursText, {color: colors.secondary}]}>Horario: {item.hours}</Text>
               <StatusBadge status={item.status} />
             </View>
 

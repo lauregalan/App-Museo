@@ -1,3 +1,4 @@
+import { useThemeColor } from '@/hooks/useThemeColor';
 import {CameraView} from  'expo-camera';
 import { router } from 'expo-router';
 import {Platform, StatusBar, StyleSheet, Text, View} from 'react-native'
@@ -10,37 +11,47 @@ export default function QrEscaner(){
     name: string;
     }
 
+    const colors = useThemeColor()
     return (
-        <SafeAreaView style={styleSheet.container}>
+        <View style={{
+            backgroundColor: colors.background,
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 20,
+            }}>
 
-            {Platform.OS === "android" ? <StatusBar hidden /> : null}
+            <SafeAreaView style={styleSheet.container}>
 
-            <CameraView
-                style={styleSheet.camStyle}
-                facing="back" //camara de atras
-                barcodeScannerSettings={
-                    {
-                        barcodeTypes: ["qr"], //solo los qr
+                {Platform.OS === "android" ? <StatusBar hidden /> : null}
+
+                <CameraView
+                    style={styleSheet.camStyle}
+                    facing="back" //camara de atras
+                    barcodeScannerSettings={
+                        {
+                            barcodeTypes: ["qr"], //solo los qr
+                        }
                     }
-                }
 
-                onBarcodeScanned={
-                    async ({ data }) => {
-                        //console.log(data); // en data voy a obtener el id de un fosil en especifico
-                        //const ans = await fetch("http://192.168.0.101:3001/fossils/" + data );
-                        const ans = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/fossils/${data}` );
-                        const fosiles = await ans.json()
-                        //console.log(fosiles)
+                    onBarcodeScanned={
+                        async ({ data }) => {
+                            //console.log(data); // en data voy a obtener el id de un fosil en especifico
+                            //const ans = await fetch("http://192.168.0.101:3001/fossils/" + data );
+                            const ans = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/fossils/${data}` );
+                            const fosiles = await ans.json()
+                            //console.log(fosiles)
 
-                        router.push({ 
-                            pathname: "/fossildetails", 
-                            params: { fossil: JSON.stringify(fosiles) } 
-                        })
+                            router.push({ 
+                                pathname: "/fossildetails", 
+                                params: { fossil: JSON.stringify(fosiles) } 
+                            })
+                        }
                     }
-                }
-            />
+                />
 
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     );
 
 }
@@ -48,7 +59,7 @@ export default function QrEscaner(){
 const styleSheet = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        //backgroundColor: '#000',
         alignItems: 'center',
         justifyContent: 'center',
         rowGap: 20

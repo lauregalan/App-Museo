@@ -44,15 +44,17 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+
   const colorScheme = useColorScheme();
 
-    // Enable verbose logging for debugging (remove in production)
-  OneSignal.Debug.setLogLevel(LogLevel.Verbose);
-  // Initialize with your OneSignal App ID
-  OneSignal.initialize('2c37e609-30dd-455e-a500-83d0219cfd83');
-  // Use this method to prompt for push notifications.
-  // We recommend removing this method after testing and instead use In-App Messages to prompt for notification permission.
-  OneSignal.Notifications.requestPermission(false);
+  useEffect(() => {
+
+
+    OneSignal.Debug.setLogLevel(LogLevel.Verbose);
+    OneSignal.initialize("2c37e609-30dd-455e-a500-83d0219cfd83");
+    OneSignal.Notifications.requestPermission(false);
+  }, []);
+
   return (
   <QueryClientProvider client={queryClient}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

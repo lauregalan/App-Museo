@@ -23,5 +23,9 @@ export default function FossilsScreen() {
   }
   if (!data) return null;
 
-  return <FossilsList  data={data} />;
+  return (
+    <View style={{paddingVertical: 50}}>
+      <FossilsList  data={data}/>
+    </View>
+  );
 }

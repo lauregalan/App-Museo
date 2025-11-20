@@ -4,6 +4,7 @@ import { Fossil } from "./types/Fossils";
 import { router } from 'expo-router';
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 interface Props {
   data: Fossil[];
@@ -28,7 +29,7 @@ export default function FossilsList({ data, isLoading, error }: Props) {
   if (error) { /* ... */ return <View style={styles.centerContainer}>...</View>; }
   if (!data || data.length === 0) { /* ... */ return <View style={styles.centerContainer}>...</View>; }
 
-
+  const colors = useThemeColor();
   return (
     <FlatList
       data={data}
@@ -52,12 +53,12 @@ export default function FossilsList({ data, isLoading, error }: Props) {
             <Pressable 
               onPress={() => {
                 //console.log("ARRANCA ACA  ----->" + JSON.stringify(item))
-                router.push({ 
+                router.push({
                 pathname: "/fossildetails", 
                 params: { fossil: JSON.stringify(item) } 
               })}
             }
-              style={styles.card} // Aseguramos que la tarjeta ocupe el 100% de su wrapper
+              style={[styles.card, {backgroundColor: colors.darklight}]} // Aseguramos que la tarjeta ocupe el 100% de su wrapper
             >
               {frontImage && (
                 <Image
@@ -68,7 +69,7 @@ export default function FossilsList({ data, isLoading, error }: Props) {
               )}
 
               <View style={styles.content}>
-                <Text style={styles.title} numberOfLines={2}>{item.name}</Text>
+                <Text style={[styles.title, {color: colors.text}]} numberOfLines={2}>{item.name}</Text>
                                 
                 <Pressable style={styles.detailsButton}>
                   <Text style={styles.detailsButtonText}>Ver detalles</Text>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     width: cardWidth, 
   },
   card: {
-    backgroundColor: "#fff",
+    //backgroundColor: "#fff",
     borderRadius: 4,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },

@@ -14,6 +14,7 @@ import {
 import { useLocalSearchParams, router, Stack } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import {useComments} from "./hooks/useComments";
+import { useThemeColor } from "@/hooks/useThemeColor";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -37,8 +38,9 @@ export default function NewDetail() {
     }).format(date).replace('.', '').toUpperCase(); 
   };
 
+  const colors = useThemeColor()
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, backgroundColor: colors.background }}>
       
       <Stack.Screen options={{ headerShown: false }} />
       
@@ -46,7 +48,7 @@ export default function NewDetail() {
         <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
       </Pressable>
 
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
@@ -59,22 +61,22 @@ export default function NewDetail() {
           <View style={styles.imageOverlay} />
         </View>
 
-        <View style={styles.sheetContainer}>
+        <View style={[styles.sheetContainer, {backgroundColor: colors.background}]}>
           
           <View style={styles.headerContent}>
-            <View style={styles.dateBadge}>
+            <View style={[styles.dateBadge, {backgroundColor: colors.darklight}]}>
               <Text style={styles.dateText}>{formatDate(data.date)}</Text>
             </View>
-            <Text style={styles.title}>{data.title}</Text>
+            <Text style={[styles.title, {color: colors.text}]}>{data.title}</Text>
           </View>
 
-          <Text style={styles.textContent}>{data.content}</Text>
+          <Text style={[styles.textContent, {color: colors.secondary}]}>{data.content}</Text>
           
           <View style={styles.divider} />
 
           <View style={styles.commentsSection}>
             <View style={styles.commentsHeaderRow}>
-              <Text style={styles.sectionTitle}>Comentarios</Text>
+              <Text style={[styles.sectionTitle, {color: colors.text}]}>Comentarios</Text>
               <View style={styles.commentCountBadge}>
                 <Text style={styles.commentCountText}>{data.comments?.length || 0}</Text>
               </View>
@@ -91,11 +93,11 @@ export default function NewDetail() {
 
                     <View style={{ flex: 1 }}>
                       <View style={styles.commentUserRow}>
-                        <Text style={styles.commentUser}>
+                        <Text style={[styles.commentUser, {color: colors.text}]}>
                           {comment.user?.name || "Usuario"}
                         </Text>
 
-                        <Text style={styles.commentTime}>
+                        <Text style={[styles.commentTime, {color: colors.secondary}]}>
                           {new Date(comment.createdAt).toLocaleDateString("es-AR", {
                             day: "2-digit",
                             month: "short",
@@ -103,7 +105,7 @@ export default function NewDetail() {
                         </Text>
                       </View>
 
-                      <Text style={styles.commentText}>{comment.text}</Text>
+                      <Text style={[styles.commentText, {color: colors.secondary}]}>{comment.text}</Text>
                     </View>
                   </View>
                 ))
@@ -120,7 +122,7 @@ export default function NewDetail() {
                 source={{ uri: "https://i.pravatar.cc/150?img=12" }} // Avatar del usuario actual
                 style={styles.myAvatar} 
               />
-              <View style={styles.inputWrapper}>
+              <View style={[styles.inputWrapper, {backgroundColor: colors.darklight}]}>
                 <TextInput
                   placeholder="Escribe un comentario..."
                   placeholderTextColor="#999"
@@ -245,10 +247,10 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: "700",
+    //fontWeight: "700",
     color: "#1a1a1a",
     fontFamily: "CormorantUnicaseBold",
-
+    
   },
   commentCountBadge: {
     backgroundColor: "#F3F4F6",
@@ -285,6 +287,7 @@ const styles = StyleSheet.create({
   },
   commentUser: {
     fontSize: 15,
+    fontFamily: "CormorantUnicaseBold",
     fontWeight: "600",
     color: "#333",
   },
